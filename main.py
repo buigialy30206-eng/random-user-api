@@ -11,7 +11,7 @@ from pydantic import BaseModel
 
 app = FastAPI(title="Random User Generator API", version="1.0.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 async def health():
     return {"status": "ok"}
 
@@ -46,7 +46,7 @@ def gen_user() -> RandomUser:
     )
 
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 async def health(): return {"status": "ok"}
 
 
