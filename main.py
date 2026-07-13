@@ -5,7 +5,7 @@ Generate fake user profiles for testing.
 
 import random, string
 
-from fastapi import FastAPI, Depends, Query
+from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
