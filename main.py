@@ -8,11 +8,9 @@ import random, string
 from fastapi import FastAPI, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from ratelimit import RateLimitMiddleware
 
 app = FastAPI(title="Random User Generator API", version="1.0.0")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
-app.add_middleware(RateLimitMiddleware)
 
 @app.api_route("/health", methods=["GET", "HEAD"])
 async def health():
@@ -44,8 +42,6 @@ def gen_user() -> RandomUser:
         job=random.choice(JOBS),
         username=f"{f.lower()}{l.lower()}{random.randint(1,99)}",
     )
-
-
 
 @app.get("/generate-batch")
 async def generate_batch(count: int = Query(10, ge=1, le=100)):
